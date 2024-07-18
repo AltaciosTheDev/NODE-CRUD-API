@@ -1,0 +1,334 @@
+<!-- 
+ 
+WHAT DO DO?
+    1)build complete CRUD api
+
+WHAT IS A SERVER??
+    Computer systems or software prorgram that offers services, resources and data to other computers(clients) through a network. 
+
+    COMMON TASKS FOR SERVERS
+        1)hosting websites
+        2)storing data
+        3)running applications
+        
+    TYPES OF SERVERS
+        PHYSICAL SERVERS
+            Actual hardware machines located in datacenters. They have all component of regular machines but do only 1 task, running a server software to handle requests from clients.
+        CLOUD SERVERS
+            Servers hosted on the cloud. Several virtual servers can run on a single physical server.
+
+INTERNET PROTOCOLS 
+    Set of rules that govern how data is transmitted over the internet.
+
+    IP: ip addresses are unique identifiers for devices on a network.
+    http/https: transmit web pages over the internet. 
+    tcp: ensures data is transmitted without errors by establishing a connection before data is transferred.
+    udp: sends data without establishing a connection and without guaranteeing delivery or error checking.
+
+API
+    set of rules and protocols that allows one piece of software to interact with another. 
+
+    RESTapis: use http methods to perform operations and are statless meaning requests from client to server must contain all the information needed to understand and process the request.
+
+HOW IT ALL WORKS TOGETHER (accessing a website from a laptop)
+    1)client request: send a request over the internet to the server hosting the website through the htttp/s protocol.
+    2)dns resolution: the domain name(www.example.com) is translated to an ip address through dns resolution.
+    3)server handling: the server receives the request. (could be physical or cloud)
+    4)server processing: gets data from database through api, runs logic.
+    5)response: the server sends back a response to the client
+    6)rendering: browser receives the response and renders the webpage.
+
+TECHLNOLOGIES TO LEARN?
+    1)NODE (JS FRAMEWORK) -> runtime environment allowing to execute js on the server side
+    2)EXPRESS(NODE FRAMEWORK) -> simplifies the process of developing serverside logic such as routing, middleware, http requests
+    3)MONGO DB(DOCUMENT NO SQL DATABASE) -> serves as database to store app data and allows CRUD operations
+    4)MONGOOSE (DRM DOCUMENT RELATIONSHIP MAPPER TO INTERACT WITH THE DATABASE) -> provides a schema solution to model application data simplifying interaction to mongo
+    5)GIT BASH(to create a git ignore and use version control system) -> allows to use git in the cli of the operating system
+    6)nodemon(node library that encloses the application to look for updates and start the server again) -> 
+
+INSTALLATION OF NODE 
+    1)Node.js runtime: This is essential, so you should definitely select this.
+    2)npm package manager: This is also essential as npm is the default package manager for Node.js.
+    3)Online documentation shortcuts: Optional. This adds shortcuts to the documentation, but you can always access the documentation online as needed.
+    4)Add to PATH: Essential. This option allows you to run Node.js and npm from the command line without specifying the full path to the executables.
+    5)Install tools for native modules: This option is useful if you plan to work with native modules that require compiling C/C++ code. It includes tools like Python and Visual Studio Build Tools. If you're not sure, you can install it later if needed.
+    6)Automatic updates: Optional. This keeps Node.js updated automatically, but you can also update manually as needed.
+
+LIST OF EVERYTHING INSTALLED
+    1)node js 
+    2)express framework through npm package manager
+    3)API testing tools
+    4)git bash to use git un the command line 
+    5)nodemon library through npm package manager
+    6)mongo db
+    7)mongoose DRM
+
+OPEN VISUAL STUDIO IN ROUTE
+    type cmd in the route path 
+
+OPEN TERMINAL 
+    ctrl + `
+
+COMMAND INITIALIZE A PACKAGE JSON 
+    npm init -y -> with default values, avoids the prompts 
+
+PACKAGE.JSON FILE
+    contains metadata about the project and its dependencies.
+
+HOW TO RUN A PROGRAM IN THE NODE TERMINAL
+    node index.js
+
+HOW TO CHANGE THE SCRIPS TO ADD A NEW ONE
+    "nameOfCommand": "node ThisFile.js"
+
+NODE MODULES
+    Contains all dependancys and libraries that we will need to use in the project 
+
+EXPRESS
+    1)Fast, minimalist web framework for Node.js, designed to make it easier to build web applications and APIs.
+    2)Provides a robust set of features for web and mobile applications
+    3)One of the most popular frameworks for building servers-side applications with Node.js
+
+    KEY FEATURES:
+        1)Middleware: Functions that execute during the lifecycle of a request to a server, such as logging,authentication.
+        2)Routing: Flexible routing system to defined routes for different http methods and urls. 
+        3)Templating: Supports template engines like Pug, EJS, handlebars, to build dynamic HTML content.
+        4)static files: easy to serve static files such as images, css and javascript files.
+        5)error hanlding: Built in mechanism for handling errors.
+        
+    BASIC USAGE
+        npm i express -> to use express you must have node with npm installed
+
+    Putting It All Together
+        1)Require Express: The Express module is imported, providing the functionalities needed to create the server.
+        2)Create an Application: An Express application instance is created, which will be used to configure and run the server.
+        3)Set the Port: A constant port is defined with the value 3000, indicating where the server will listen for requests.
+        4)Define a Route: A route handler is set up for GET requests to the root URL (/). When a GET request is made to this URL, the server responds with 'Hello, World!'.
+        5)Start the Server: The server is started and begins listening for requests on port 3000. When the server starts, a message is logged to the console indicating the URL where the server can be accessed.
+
+    INITIAL ERROR
+        Must turn off server to see changes made after it was made live 
+
+    MIDDELWARE
+        1)Functions that execute during the request-responser cycle. 
+        2)Having access to the req and res objects for adding functionality and handling various aspects of logic. 
+        3)ALWAYS DEFINE AT THE VERY TOP TO ENSURE USAGE
+
+        USUAL TASKS
+            1)parsing incoming request bodies
+            2)logging request details 
+            3)checking if a user is authenticated or has permission to access a resource
+            4)handling CORS 
+            5)catching and processing errrors that occurs during requerst handling
+            6)serving sttic assets like html, css and js files
+
+        EXAMPLE FOR MODIFYING DATA
+            app.get('/', logger,logger,logger(req, res){
+                res.send('whatever')
+            })
+
+            function logger(req, res, next) {
+                console.log(req.originalUrl)
+                next()
+            }
+
+        EXAMPLE FOR PARSING DATA
+            app.use(express.json())
+            app.use(expres.urlencoded({extended:true}))
+
+        ACCESSING QUERY PARAMETERS
+            This property is an object containing a property for each query string parameter in the route. When query parser is set to disabled, it is an empty object {}, otherwise it is the result of the configured query parser.
+
+            EXAMPLE
+                req.query.whateverPassed
+
+
+    HOW TO HANDLE REQUESTS 
+        app.method("route", function(req,res){
+            const product = Model.create(req.body)
+        })
+
+    ROUTE PARAMETERS
+        1)Route parameters are named URL segmenets that are used to capture values specified at their position in the URL. 
+        2)The captured values are populated in the req.params object, with the name of the route parameter specified in the path as their respective keys.
+        
+        EXAMPLE
+            Route path: /users/:userId/books/:bookId
+            Request URL: http://localhost:3000/users/34/books/8989
+            req.params: { "userId": "34", "bookId": "8989" }
+
+    ROUTER
+        concept of a mini app containing its own logic to make the server side logic more composable
+
+        EXAMPLE 
+            const userRouter = require('./routes/users')
+            const productRouter = require('./routes/products')
+            app.use('/users', userRouter)
+            app.use('/products', productRouter)
+
+            router.get("/", (req, res) => {
+                res.send('user list')
+            })
+
+            router.get("/new", (req, res) => {
+                res.send('user form')
+            })
+
+    ADVANCED ROUTING 
+        ROUTE PARAMETERS
+            :id -> route parameter(variable accessed through a dynamic part in the url)
+            const {id} = req.params -> this returns an object with properties exactly equal to the route parameter
+        
+        IMPORTANCE ORDER OF ROUTES
+            always put static routes first and dynamic routes will be placed later.
+
+
+        APP.ROUTE()
+            1)A process of creating chainable route handlers for a route path by using app.route().
+            2)Reduces redundancy and typos. 
+            3)A method for changing almost only the method b/c the actual route will stay almost the same 
+
+            EXAMPLE
+                app.route('/book')
+                    .get((req, res) => {
+                        res.send('Get a random book')
+                    })
+                    .post((req, res) => {
+                        res.send('Add a book')
+                    })
+                    .put((req, res) => {
+                        res.send('Update the book')
+                    })
+
+
+GIT IGNORE
+    1)Special file in git repositories to specify which files should be ignored by git. 
+    2)Any files in the gitignore will not be tracked or commited to the repository.
+
+NODEMON
+    Tool that helps node.js based applications by automatically restarting the node application when file changes in the directory are detected.
+
+    INSTALL COMMAND
+        npm i nodemon -D -> this will install as a dev dependancy 
+
+MONDO DB
+    1)The most popular, open-source NoSQL database that uses a document-oriented data model.
+    2)Stores data in JSON like documents, which makes it easy to sotre and retrieve complex hierarchical data structures.
+
+    DESIGNED FOR:
+        1)scalability
+        2)high performance
+        3)ease of development 
+
+    KEY FEATURES
+        1)document-oriented: allows for flexible and dynamic schemes. Each document can have its own structure making easy to represent complex data relationships.
+        2)schemaless: Does not enforce a strict schema. This allows devs to evolve the data over time without migrations.
+        3)high performance: high performance and scalability. Allows sharding(distribute data across multiple servers)
+        4)Rich Query Language: Support for CRUD operations as well as aggregation pipelines for complex data aggregation
+        5)indexes: Supports indexes to improve query performance.
+
+    PROCESS FOR CREATING THE MONGO DB PROJECT 
+        1)create project
+        2)create cluster(where you choose were your database will be deployed)
+        3)create security connection to the cluster 
+        4)connect to the backend
+        5)Add ip 0 to connect from anywhere 
+        
+    SECURITY DATA FOR THE MONGO DATABASE    
+        Cloud - hosted version of mongoDB and it provides an intuitive interface for managing MongoDB clusters.
+        database username: enzoaltamirano98
+        password: eLp09EDapF7vpFCx
+        password: D20k2jTpWpuIhpsF (this one) 
+
+    COMMAND TO INSTALL
+        npm install mongodb
+
+    ADDING THE CONNECTION STRING 
+        mongoose.connect('mongodb+srv://enzoaltamirano98:D20k2jTpWpuIhpsF@backenddb.5g9fwwm.mongodb.net/CRUD-NODE-API/?retryWrites=true&w=majority&appName=BackendDB')\
+
+MONGOOSE
+    x)Mongo DB object modelling tool designed to work in an async environment. Supports node.js and deno.
+    1)Object Data Modelling (ODM) library for MongoDB and Nodejs. 
+    2)Provides a high level abstrancion over the mongoDB node.js driver, allowing to define schemas, models, and relationships with ease.
+    3)Simplifies interactions with MongoDB databases by providing a schema based solution to model the app data. 
+
+    COMMAND TO INSTALL
+        npm i mongoose
+
+    IMPORTS
+        const mongoose = require('mongoose') -> using node.js require
+        import mongoose from 'mongoose'      -> using es6 imports 
+
+    CONNECTING TO DATABASE
+        mongoose.connect('mongodb+srv://enzoaltamirano98:D20k2jTpWpuIhpsF@backenddb.5g9fwwm.mongodb.net/CRUD-NODE-API/?retryWrites=true&w=majority&appName=BackendDB')
+
+        1)protocol: mongodb+srv://
+            indicates dns seed list connection simplifying the connnection to the db
+        2)username: enzoaltamirano98
+            username to authenticate with the mongodb database
+        3)password:D20k2jTpWpuIhpsF
+            Password for the identified user
+        4)Host: backenddb.5g9fwwm.mongodb.net 
+            Specifies the host where your mongoDB instance is running: name of cluster, unique id for cluster, and domain for atlas
+        5)database: CRUD-NODE-API
+            this specifies the name of the database you want to connect to within the cluster
+        6)query params
+            retryWrites=true -> write operations will auto retry in case of trasient error
+            w=majority       -> ensures durability
+            appName=BackendDB-> sets the apps name for the connection. 
+
+    DATABASE SCHEMA 
+        mongoose.Schema: Used to define the structure (fields, types, validations) of MongoDB documents.
+        1)DEFINES THE STRUCTURE OF DATA THAT WILL BE STORED IN A DATABASE
+            a)specifying the fields
+            b)their types
+            c)validations
+            d)default values 
+        2)ALLOWS TO DEFINE THE RELATIONSHIPS BETWEEN DIFFERENT TYPES OF DATA 
+            a)one to one
+            b)one to many 
+            c)many to many 
+
+        EXAMPLE
+            const Schema = mongoose.Schema;
+            const ObjectId = Schema.ObjectId;
+
+            const BlogPost = new Schema({
+            author: ObjectId,
+            title: String,
+            body: String,
+            date: Date
+            });
+
+    MODEL
+        mongoose.model: Used to create a model (interface) based on a schema, representing a MongoDB collection.
+
+    EXPORTS
+        module.exports: Used to export the Mongoose model from a module so that it can be imported and used in other parts of the application.
+
+    CREATING A MODEL TO SEND AS A RESPONSE
+        Model.create() is an async method that will return a promise. 
+        
+        EXAMPLE
+            aysnc over here
+            const product = await Product.create(req.body)
+
+    FINDING ALL MODELS IN THE DATABASE COLLECTION 
+        // find all documents
+        await MyModel.find({});
+
+        // find all documents named john and at least 18
+        await MyModel.find({ name: 'john', age: { $gte: 18 } }).exec();
+
+        // executes, name LIKE john and only selecting the "name" and "friends" fields
+        await MyModel.find({ name: /john/i }, 'name friends').exec();
+
+        // passing options
+        await MyModel.find({ name: /john/i }, null, { skip: 10 }).exec();
+
+    UPDATING A MODEL IN THE DATABASE
+        A.findByIdAndUpdate(id, update, options)  // returns Query
+        A.findByIdAndUpdate(id, update)           // returns Query
+        A.findByIdAndUpdate()                     // returns Query
+    
+-->
